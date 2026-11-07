@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "id": "ttstoggle",
+  "version": "${version}",
+  "name": "TTS Toggle",
+  "description": "Client-side text-to-speech toggle for Simple Voice Chat.",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["dev.ttstoggle.TtsToggleClient"],
+    "voicechat": ["dev.ttstoggle.TtsVoicechatPlugin"]
+  },
+  "depends": {
+    "fabricloader": ">=0.18.1",
+    "minecraft": "1.21.11",
+    "fabric-api": "*",
+    "voicechat": ">=${minecraft_version}-${voicechat_api_version}"
+  }
+}
