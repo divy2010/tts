@@ -17,7 +17,7 @@ A client-side mod prototype for Windows + Fabric + Simple Voice Chat.
 - Windows PowerShell + a Windows speech voice installed
 
 ## Build
-Run `gradle build` from this folder with Gradle 8.14+ and JDK 21.
+Run `gradle build` from this folder with Gradle 9.2+ and JDK 21.
 The output jar will be in `build/libs/`.
 
 ## Important limitations
