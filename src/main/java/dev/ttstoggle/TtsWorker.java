@@ -14,9 +14,8 @@ final class TtsWorker {
 
     private TtsWorker() {}
 
-    static void submit(String text, long generation) {
+    static void submit(String text) {
         EXECUTOR.submit(() -> {
-            if (!TtsState.isCurrentGeneration(generation)) return;
             Path wav = null;
             try {
                 wav = Files.createTempFile("mc-tts-", ".wav");
@@ -34,7 +33,7 @@ final class TtsWorker {
                         for (int i = 0; i < pcm.length; i++) {
                             pcm[i] = (short) ((bytes[i * 2] & 0xff) | (bytes[i * 2 + 1] << 8));
                         }
-                        TtsState.enqueuePcm(pcm, generation);
+                        TtsState.enqueuePcm(pcm);
                     }
                 }
             } catch (Exception e) {

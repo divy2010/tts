@@ -11,7 +11,9 @@ base {
 }
 
 repositories {
+    maven { url = 'https://maven.fabricmc.net/' }
     maven { url = 'https://maven.maxhenkel.de/repository/public' }
+    mavenCentral()
 }
 
 dependencies {
@@ -25,11 +27,7 @@ dependencies {
 processResources {
     inputs.property "version", project.version
     filesMatching("fabric.mod.json") {
-        expand(
-            "version": project.version,
-            "minecraft_version": project.minecraft_version,
-            "voicechat_api_version": project.voicechat_api_version
-        )
+        expand "version": project.version
     }
 }
 
