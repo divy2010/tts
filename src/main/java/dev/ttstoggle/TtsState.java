@@ -13,7 +13,12 @@ public final class TtsState {
     private TtsState() {}
 
     public static boolean isEnabled() { return ENABLED.get(); }
-    public static boolean toggle() { return ENABLED.updateAndGet(v -> !v); }
+    public static synchronized boolean toggle() {
+        boolean enabled = !ENABLED.get();
+        ENABLED.set(enabled);
+        if (!enabled) clearAudio();
+        return enabled;
+    }
 
     public static void speak(String text) {
         // Keep TTS work off Minecraft's chat and voice threads.

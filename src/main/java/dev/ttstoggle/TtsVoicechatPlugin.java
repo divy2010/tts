@@ -1,7 +1,7 @@
 package dev.ttstoggle;
 
-import de.maxhenkel.voicechat.api.VoicechatApi;
 import de.maxhenkel.voicechat.api.VoicechatPlugin;
+import de.maxhenkel.voicechat.api.events.EventRegistration;
 import de.maxhenkel.voicechat.api.events.MergeClientSoundEvent;
 
 public final class TtsVoicechatPlugin implements VoicechatPlugin {
@@ -11,13 +11,13 @@ public final class TtsVoicechatPlugin implements VoicechatPlugin {
     }
 
     @Override
-    public void initialize(VoicechatApi api) {
-        api.getEventRegistration().registerEvent(MergeClientSoundEvent.class, event -> {
+    public void registerEvents(EventRegistration registration) {
+        registration.registerEvent(MergeClientSoundEvent.class, event -> {
             if (!TtsState.isEnabled()) return;
             short[] frame = TtsState.nextFrame();
             if (frame != null) {
-                // Mix generated speech into the normal microphone stream.
-                // Simple Voice Chat then applies its normal group/proximity routing.
+                // Mix generated speech into the microphone stream.
+                // Simple Voice Chat routes the resulting audio using its normal rules.
                 event.mergeAudio(frame);
             }
         });
